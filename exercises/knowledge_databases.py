@@ -8,11 +8,30 @@ Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-def add_article():
-	pass
+def add_article( name, topic, rating):
+	    article_object = Knowledge(
+	        name=name,
+	        topic=topic,
+	        rating=rating)
+	    session.add(article_object)
+	    session.commit()
+
+
+add_article("weather", "rainbow", 10)
+
+add_article("food", "sushi", 2)
+add_article("weather", "heat", 10)
+
+	
 
 def query_all_articles():
-	pass
+	articles = session.query(
+	    Knowledge).all()
+	return articles
+
+
+print(query_all_articles())
+
 
 def query_article_by_topic():
 	pass
