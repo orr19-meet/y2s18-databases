@@ -36,13 +36,7 @@ def delete_article_by_topic(topic):
 	session.query(
 	    Knowledge).filter_by(topic=topic).delete()
 	session.commit()
-add_article("weather", "rainbow", 10)
 
-add_article("food", "sushi", 2)
-add_article("weather", "heat", 5)
-
-delete_article_by_topic("rainbow")
-	
 def delete_all_articles():
 	articles = session.query(
 	    Knowledge).delete()
@@ -59,10 +53,37 @@ def delete_article_by_rating(threshold):
 	    Knowledge).all()
 	for i in articles:
 		if(i.rating<threshold):
-			articles[i].delete()
+			session.delete(i)
 			session.commit()
 
-delete_article_by_rating(3)
+def query_article_by_primary_key(id):
+	article=session.query(
+	    Knowledge).filter_by(article_id=id).first()
+	return article
+
+def query_by_top_5():
+	articles = session.query(
+	    Knowledge).all()
+	articles.order_by(Knowledge.rating)
+	print("top 5: \n")
+	for i in range (5):
+		print(articles[i])
+
+delete_all_articles()
+add_article("weather", "rainbow", 10)
+add_article("food", "sushi", 2)
+add_article("weather", "heat", 5)
+add_article("meet", "student", 1)
+add_article("school", "iasa", 9)
+add_article("math", "devision", 8)
+add_article("shape", "heart", 9)
+
+
+
+# query_article_by_primary_key(1).topic="rain"
+# delete_article_by_topic("rainbow")
+query_by_top_5()	
+#delete_article_by_rating(3)
 #edit_article_rating(11,"food")
 #delete_all_articles()
 print(query_all_articles())	
