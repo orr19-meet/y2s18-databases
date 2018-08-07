@@ -13,14 +13,15 @@ class Knowledge(Base):
    rating = Column(Integer)
 
    def __repr__(self):
-        if (self.rating>=7):
+        # if (self.rating>=7):
 	        return ("{}."
-	          		"If you want to learn about {}"
-	                ", you should look at the wikipedia page called {}. \n "
-	                "We gave this article a rating of {} out of 10!").format(
-	                    self.article_id, self.name, self.topic, self.rating)
-        else:
-	    	return("Unfortunately, this article does not have a better rating. Maybe, this is an article that should be replaced soon!.")
+	        		"Article Name: {}\n"
+              		"Topic: {} \n"
+               		"Rating: {} \n").format(
+                    	self.article_id, self.name, self.topic, self.rating)
+
+      #   else:
+	    	# return("Unfortunately, this article does not have a better rating. Maybe, this is an article that should be replaced soon!.")
 
 
 
@@ -28,7 +29,7 @@ a=Knowledge(article_id=1, name="weather", topic="rainbow", rating=10)
 # print(a)
 
 b=Knowledge(article_id=2, name="food", topic="shushi", rating=2)
-print(b)
+#print(b)
 
 
 
